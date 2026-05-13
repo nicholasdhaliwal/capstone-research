@@ -1,0 +1,20 @@
+.DS_Store
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Heavy binary directories — kept locally, not committed
+papers/
+presentations/
+prior-work/
+reference/
+team/
+paper/
+
+# Binary documents anywhere in the tree
+*.docx
+*.pptx
+*.pdf
+
+# Local-only research scratch
+notes/_archived_*

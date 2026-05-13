@@ -1,0 +1,31 @@
+# Small prototype config for rapid iteration
+# ~50M parameters, trains on a single A100 in ~6 hours on 10B tokens
+
+model:
+  d_token: 256
+  n_token_layers: 4
+  n_token_heads: 8
+  d_concept: 512
+  n_concept_layers: 8
+  n_concept_heads: 8
+  d_scan: 128
+  d_head: 64
+  vocab_size: 50257        # GPT-2 tokenizer; swap for your tokenizer
+  max_seq_len: 2048
+  target_ratio: 4          # R: average tokens per concept
+  aux_loss_weight: 0.01    # boundary load balancing loss weight
+
+train:
+  lr_token: 3.0e-4         # token encoder/decoder LR (muP-scaled)
+  lr_concept: 1.5e-4       # concept backbone LR (muP-scaled, wider -> lower LR)
+  lr_boundary: 3.0e-4      # boundary detector LR
+  weight_decay: 0.1
+  max_grad_norm: 1.0
+  warmup_steps: 1000
+  total_steps: 50000
+  batch_size: 16
+  grad_accum: 4            # effective batch = 64 sequences
+  max_seq_len: 1024
+  eval_every: 500
+  save_every: 2000
+  output_dir: checkpoints/small
