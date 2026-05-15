@@ -36,3 +36,7 @@ notebooks/legal-rag/results.json
 
 # NLTK / HF caches if they ever land in the tree
 nltk_data/
+
+# local-only Claude config (not pushed to GitHub)
+CLAUDE.md
+.mcp.json
