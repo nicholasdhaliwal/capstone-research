@@ -1,6 +1,7 @@
 # capstone-research
 
-UChicago MS ADS capstone thesis. Legal LLM reasoning. Showcase Aug 15, 2026.
+UChicago MS ADS capstone thesis.
+Showcase Aug 5, 2026.
 
 ## Folders
 
