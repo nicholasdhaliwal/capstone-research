@@ -4,12 +4,13 @@ __pycache__/
 .ipynb_checkpoints/
 
 # Heavy binary directories — kept locally, not committed
-papers/
-presentations/
-prior-work/
-reference/
-team/
 paper/
+team/
+references/papers/
+references/meta-lcm-repo/
+references/concept-lm-snapshot/
+team/presentations/
+notebooks/legal-rag/models/
 
 # Binary documents anywhere in the tree
 *.docx
@@ -23,7 +24,6 @@ notes/_archived_*
 *.pt
 *.bin
 *.safetensors
-notebooks/legal-rag/models/
 
 # Python virtual environments
 .venv/

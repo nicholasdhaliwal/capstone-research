@@ -1,4 +1,0 @@
-name: dummy_sonar_normalizer
-model_family: sonar_normalizer
-model_arch: base
-checkpoint: mock_data/dummy_normalizer.pt
