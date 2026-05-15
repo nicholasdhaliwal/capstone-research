@@ -18,3 +18,21 @@ paper/
 
 # Local-only research scratch
 notes/_archived_*
+
+# Model checkpoints (too large for GitHub)
+*.pt
+*.bin
+*.safetensors
+legal-rag/models/
+
+# Python virtual environments
+.venv/
+venv/
+
+# Notebook generated artifacts
+*.npy
+legal-rag/results/
+legal-rag/results.json
+
+# NLTK / HF caches if they ever land in the tree
+nltk_data/
