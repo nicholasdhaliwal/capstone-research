@@ -1,0 +1,4 @@
+name: dummy_2t_pretrained_model
+model_family: two_tower_diffusion_lcm
+checkpoint: file:///dev/null
+model_arch: toy_two_tower_diffusion_lcm

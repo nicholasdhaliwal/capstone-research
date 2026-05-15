@@ -1,0 +1,41 @@
+# @package evaluator
+
+requirements:
+  nodes: 1
+  tasks_per_node: 1
+  gpus_per_node: 1
+  cpus_per_task: 8
+  mem_gb: 256
+  timeout_min: 120 # 2 hours
+  constraint: null
+  max_num_timeout: 10
+
+_builder_: lcm.evaluation.arun.build_async_task
+_runner_: lcm.evaluation.arun.schedule_task
+
+run_config:
+  dump_dir: null
+  seed: 42
+  confidence_level: 0.95
+  show_progress: false
+  log_raw_results: false
+  temperature: 0
+  top_k: 0
+  top_p: 1.0
+
+  # Number of input shards to evaluate in parallel
+  nshards: 1
+
+# Run the evaluation for every n saved and consolidated checkpoints. The number
+# of evaluation is calculated by:
+#     ``TrainingConfig.save_model_every_n_steps * evaluate_every_n_saved_models
+# We set this attribute to be mandatory to enforce
+evaluate_every_save_steps: ???
+
+predictor: ???
+
+# Calculated automatically
+evaluate_every_n_steps: null
+max_evaluation_steps: null
+
+tasks: []

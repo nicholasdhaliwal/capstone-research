@@ -1,0 +1,70 @@
+# @package trainer
+
+_trainer_: lcm.train.lcm.trainer.prepare_lcm_trainer
+
+output_dir: ??
+
+# Parameter Size: 1,647,635,456
+model_arch: base_lcm_1_6B
+
+criterion:
+  name: next_sentence_mse
+  reduction: sum
+  compute_rmse: False
+
+dtype: "torch.float16"
+use_optimizer_in_fp32: true
+use_fsdp: true
+fsdp_fp32_reduce: true
+
+lr: 0.0004
+lr_schedule: cosine
+num_lr_warmup_steps: 10_000
+max_steps: 250_000
+gradient_accumulation: 1
+max_grad_norm: 25
+weight_decay: 0.1
+adam_betas:
+  - 0.9
+  - 0.95
+adam_eps: 1e-5
+
+validate_every_n_steps: 10_000
+save_model_every_n_steps: 2_000
+checkpoint_every_n_steps: 2_000
+keep_last_n_checkpoints: 2
+preserve_consolidated_models: True
+publish_metrics_every_n_steps: 100
+
+seed: 1
+profile: false
+
+data_loading_config:
+  max_tokens: 7168
+  min_batch_size: 1
+  len_to_wrap_long_seq: 128
+  packing: false
+  min_length_of_sequences: 1
+  min_length_after_batching: 2
+  num_parallel_calls: 1
+  nb_prefetch: 5
+  nb_epochs: 1
+
+validation_data_loading_config:
+  len_to_wrap_long_seq: 128
+
+training_data:
+  - name: "pretraining_data=train"
+    source_suffix_text: "End of text."
+
+validation_data:
+  - name: "pretraining_data=validation"
+    source_suffix_text: "End of text."
+
+requirements:
+  nodes: 4
+  tasks_per_node: 8
+  gpus_per_node: 8
+  cpus_per_task: 32
+  mem_gb: 0
+  timeout_min: 10000

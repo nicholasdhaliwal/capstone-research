@@ -1,0 +1,4 @@
+name: dummy_mse_pretrained_model
+model_family: base_lcm
+checkpoint: file:///dev/null
+model_arch: toy_base_lcm

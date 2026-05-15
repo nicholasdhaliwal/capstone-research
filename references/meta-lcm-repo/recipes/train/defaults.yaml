@@ -1,0 +1,12 @@
+defaults:
+  - launcher: submitit
+  - requirements@trainer
+  - _self_
+dry_run: false
+trainer:
+  # please specify a trainer conf, the easiest is to have this in another config, see train/__main__.py for more details.
+  output_dir: ???
+launcher:
+  # set the executor logs and config dumps to be under the trainer outputs directory
+  log_folder: ${trainer.output_dir}/executor_logs
+  config_dump_dir: ${trainer.output_dir}/config_logs

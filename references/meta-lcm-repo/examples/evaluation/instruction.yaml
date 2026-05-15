@@ -1,0 +1,11 @@
+source_prefix_text: |
+  [INST] You are reading a chapter of the book.
+  Please provide the summary of the chapter in maximum 1500 words.
+  Adhere to the main plot and keep the characters if found in the chapter.
+  The chapter is written between the tags [CHAPTER] and [/CHAPTER].
+  [CHAPTER]
+
+source_suffix_text: |
+  [/CHAPTER].
+  Write at least 1000 words.
+  [/INST]

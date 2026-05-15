@@ -1,0 +1,58 @@
+# @package trainer
+
+_trainer_: lcm.train.lcm.trainer.prepare_lcm_trainer
+
+requirements:
+  nodes: 4
+  tasks_per_node: 8
+  gpus_per_node: 8
+  cpus_per_task: 32
+  mem_gb: 0
+
+# Overwrite to start from a different pre-trained model
+model_config_or_name: dummy_mse_pretrained_model
+
+criterion:
+  name: target_mse
+  reduction: sum
+  compute_rmse: False
+
+output_dir: ??
+dtype: "torch.float16"
+use_optimizer_in_fp32: true
+use_fsdp: true
+fsdp_fp32_reduce: true
+
+lr_schedule: cosine
+start_lr: 1e-6
+final_lr: 1e-6
+lr: 0.00003
+num_lr_warmup_steps: 3_000
+max_grad_norm: 25
+weight_decay: 0.01
+
+max_steps: 20_000
+gradient_accumulation: 1
+validate_every_n_steps: 1_000
+checkpoint_every_n_steps: 1_000
+save_model_every_n_steps: 1_000
+keep_last_n_checkpoints: 2
+publish_metrics_every_n_steps: 100
+preserve_consolidated_models: true
+
+seed: 1
+profile: false
+
+data_loading_config:
+  max_tokens: 7168
+  nb_epochs: 5
+
+training_data:
+  - name: "finetuning_data=train"
+    source_suffix_text: "[MODEL]:"
+    target_suffix_text: "End of text."
+
+validation_data:
+  - name: "finetuning_data=validation"
+    source_suffix_text: "[MODEL]:"
+    target_suffix_text: "End of text."
