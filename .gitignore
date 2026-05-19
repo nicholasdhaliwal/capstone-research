@@ -13,6 +13,9 @@ notebooks/legal-rag/results/
 notebooks/legal-rag/results.json
 notebooks/legal-rag/models/
 
+# Exception: precomputed SONAR embeddings shipped for the Colab logprob notebook
+!notebooks/legal-rag/data_for_colab/*.npy
+
 # Model checkpoints (too large for GitHub)
 *.pt
 *.bin
