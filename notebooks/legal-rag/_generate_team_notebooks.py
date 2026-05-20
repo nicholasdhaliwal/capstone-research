@@ -83,7 +83,30 @@ RESULTS_TAG  = f'{{MODEL}}_{{RETRIEVER}}'
 np.random.seed(SEED)
 print(f'config ready: model={{MODEL}}  retriever={{RETRIEVER}}  N_TEST={{N_TEST}}')"""
 
-DATASET_CODE = """ds = load_dataset('casehold/casehold', 'all')
+DATASET_CODE = """# Load CaseHOLD directly from HF CSV files instead of through the deprecated
+# loader script (`casehold.py`). Works on any `datasets` version, no special
+# pinning needed.
+CASEHOLD_BASE = 'https://huggingface.co/datasets/casehold/casehold/resolve/main/data/all'
+ds = load_dataset('csv', data_files={
+    'train': f'{CASEHOLD_BASE}/train.csv',
+    'test':  f'{CASEHOLD_BASE}/test.csv',
+})
+
+# CSV columns are positional. Header is 'Unnamed: 0,0,1,2,...,11'.
+# Per the original casehold.py: col 0=example_id, col 1=citing_prompt,
+# cols 2..6=holding_0..4, col 12=label.
+def _rename(ex):
+    return {
+        'example_id':    int(ex['Unnamed: 0']),
+        'citing_prompt': ex['0'],
+        'holding_0':     ex['1'],
+        'holding_1':     ex['2'],
+        'holding_2':     ex['3'],
+        'holding_3':     ex['4'],
+        'holding_4':     ex['5'],
+        'label':         int(ex['11']),
+    }
+ds = ds.map(_rename, remove_columns=ds['train'].column_names)
 test = ds['test'].select(range(N_TEST))
 print(f'test questions: {len(test)}')"""
 

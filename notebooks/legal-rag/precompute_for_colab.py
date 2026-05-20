@@ -26,7 +26,24 @@ SEED        = 42
 OUT_DIR = Path("data_for_colab")
 OUT_DIR.mkdir(exist_ok=True)
 
-ds = load_dataset("casehold/casehold", "all")
+CASEHOLD_BASE = "https://huggingface.co/datasets/casehold/casehold/resolve/main/data/all"
+ds = load_dataset("csv", data_files={
+    "train": f"{CASEHOLD_BASE}/train.csv",
+    "test":  f"{CASEHOLD_BASE}/test.csv",
+})
+# CSV columns are positional. Map to the canonical schema.
+def _rename(ex):
+    return {
+        "example_id":    int(ex["Unnamed: 0"]),
+        "citing_prompt": ex["0"],
+        "holding_0":     ex["1"],
+        "holding_1":     ex["2"],
+        "holding_2":     ex["3"],
+        "holding_3":     ex["4"],
+        "holding_4":     ex["5"],
+        "label":         int(ex["11"]),
+    }
+ds = ds.map(_rename, remove_columns=ds["train"].column_names)
 train = ds["train"].select(range(CORPUS_SIZE))
 test  = ds["test"].select(range(N_TEST))
 corpus_texts = [r["citing_prompt"] for r in train]
