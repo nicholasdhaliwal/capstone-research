@@ -22,7 +22,6 @@ notebooks/legal-rag/
 │   ├── sonar_test_queries_50.npy
 │   └── manifest.json
 ├── precompute_for_colab.py            Regenerate the embeddings locally (needs fairseq2)
-├── legal_rag_demo.ipynb               Original combined demo (kept for history)
 └── results/                           Per-notebook results land here (gitignored)
 ```
 
