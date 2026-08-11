@@ -1,19 +1,28 @@
-# capstone-research
+# capstone-research (archived)
 
-UChicago MS ADS capstone thesis.
-Showcase Aug 5, 2026.
+**This repository is archived and is no longer the home of the active research.**
+
+It holds the earlier stages of a UChicago MS ADS capstone: an initial research
+direction on concept-level language modeling, and the first-semester CaseHOLD
+retrieval experiments that followed it.
+
+The study that came out of this work — prospective difficulty scoring for legal
+multiple-choice questions on CaseHOLD — has been consolidated into a standalone
+repository with the evaluation code, the verified run data, and full provenance
+documentation. Nothing here has been deleted; this repository remains as the
+historical record.
 
 ## Folders
 
-- `paper/` — capstone paper drafts (.docx)
+- `paper/` — drafts from the earlier concept-modeling direction (.docx)
 - `notebooks/` — experiment notebooks
-  - `legal-rag/` — main experiment: retrieval-augmented SaulLM on CaseHOLD
-  - `saul-7b/` — local SaulLM chat + failure-mode probes
-  - `concept-lm-staged-notebooks/` — earlier concept-LM training work, kept for reference
-- `code/` — helper scripts (SONAR corpus pre-encoder, etc.)
-- `data/` — small evaluation sets we track in git
-- `outputs/` — generated figures, accuracy tables, swing analyses
-- `references/` — cited papers and cloned external repos (kept local)
-- `notes/` — research notes, lit review summaries, Saul probe transcripts
-- `team/` — meeting agendas, decks, capstone admin
-- `docs/` — handoff doc and design decisions
+  - `legal-rag/` — first-semester retrieval-augmented SaulLM experiments on CaseHOLD
+  - `saul-7b/` — local SaulLM chat and failure-mode probes
+  - `concept-lm-staged-notebooks/` — concept-LM training work from the earlier direction
+  - `vertex-eval/` — an early snapshot of the evaluation stack; superseded
+- `code/` — helper scripts (SONAR corpus pre-encoder)
+- `data/`, `outputs/` — placeholders; no results were tracked here
+- `references/` — cited papers from the earlier direction, and cloned external repos
+- `notes/` — research notes and literature summaries
+- `team/` — capstone administration
+- `docs/` — design rationale and handoff documents
